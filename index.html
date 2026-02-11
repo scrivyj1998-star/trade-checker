@@ -1,95 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<title>Survive a Tsunami – Brainrots Trade Checker</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tap Jumper</title>
+
 <style>
-  body {
-    margin: 0;
-    background: black;
-    overflow: hidden;
-  }
-  canvas {
-    display: block;
-    margin: auto;
-    background: #111;
-    touch-action: none;
-  }
+body {
+  background:#0e0e0e;
+  color:white;
+  font-family: Arial, sans-serif;
+  text-align:center;
+  margin:0;
+}
+header {
+  background:#111;
+  padding:20px;
+  font-size:22px;
+  font-weight:bold;
+}
+.box {
+  background:#1b1b1b;
+  margin:15px;
+  padding:20px;
+  border-radius:10px;
+}
+select {
+  width:100%;
+  padding:12px;
+  font-size:16px;
+  border-radius:6px;
+}
+button {
+  margin-top:15px;
+  padding:12px 20px;
+  font-size:18px;
+  background:#ff4757;
+  color:white;
+  border:none;
+  border-radius:8px;
+}
+.result {
+  font-size:22px;
+  margin-top:15px;
+}
+.win { color:#2ed573; }
+.fair { color:#ffa502; }
+.loss { color:#ff6b6b; }
+footer {
+  font-size:13px;
+  opacity:0.6;
+  padding:10px;
+}
 </style>
 </head>
+
 <body>
 
-<canvas id="game"></canvas>
+<header>🌊 Survive a Tsunami – Brainrots Trade Checker</header>
+
+<div class="box">
+  <h3>Your Item</h3>
+  <select id="itemA">
+    <option value="0">Select item</option>
+    <option value="10">Small Brainrot</option>
+    <option value="25">Medium Brainrot</option>
+    <option value="50">Large Brainrot</option>
+    <option value="100">Golden Brainrot</option>
+  </select>
+</div>
+
+<div class="box">
+  <h3>Their Item</h3>
+  <select id="itemB">
+    <option value="0">Select item</option>
+    <option value="10">Small Brainrot</option>
+    <option value="25">Medium Brainrot</option>
+    <option value="50">Large Brainrot</option>
+    <option value="100">Golden Brainrot</option>
+  </select>
+</div>
+
+<button onclick="checkTrade()">Check Trade</button>
+
+<div class="result" id="result"></div>
+
+<footer>
+  Not official • Fan-made trade values
+</footer>
 
 <script>
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+function checkTrade() {
+  let a = Number(document.getElementById("itemA").value);
+  let b = Number(document.getElementById("itemB").value);
+  let result = document.getElementById("result");
 
-canvas.width = window.innerWidth;
-canvas.height = 300;
+  if (a === 0 || b === 0) {
+    result.innerHTML = "Select both items";
+    result.className = "result";
+    return;
+  }
 
-let player = {
-  x: 50,
-  y: 220,
-  size: 30,
-  velY: 0,
-  jump: false
-};
-
-let gravity = 1;
-let obstacleX = canvas.width;
-let speed = 6;
-let dead = false;
-
-function tap() {
-  if (!player.jump && !dead) {
-    player.velY = -15;
-    player.jump = true;
+  if (b > a) {
+    result.innerHTML = "WIN ✅";
+    result.className = "result win";
+  } else if (b === a) {
+    result.innerHTML = "FAIR ⚖️";
+    result.className = "result fair";
+  } else {
+    result.innerHTML = "LOSS ❌";
+    result.className = "result loss";
   }
 }
-
-document.addEventListener("touchstart", tap);
-document.addEventListener("mousedown", tap);
-
-function draw() {
-  if (dead) return;
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // player
-  player.velY += gravity;
-  player.y += player.velY;
-
-  if (player.y >= 220) {
-    player.y = 220;
-    player.jump = false;
-    player.velY = 0;
-  }
-
-  ctx.fillStyle = "cyan";
-  ctx.fillRect(player.x, player.y, player.size, player.size);
-
-  // obstacle
-  obstacleX -= speed;
-  if (obstacleX < -40) obstacleX = canvas.width + 200;
-
-  ctx.fillStyle = "red";
-  ctx.fillRect(obstacleX, 240, 40, 60);
-
-  // collision
-  if (
-    player.x < obstacleX + 40 &&
-    player.x + player.size > obstacleX &&
-    player.y + player.size > 240
-  ) {
-    dead = true;
-    alert("Game Over");
-  }
-
-  requestAnimationFrame(draw);
-}
-
-draw();
 </script>
 
 </body>
