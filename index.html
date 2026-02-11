@@ -2,88 +2,134 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Survive a Tsunami – Brainrots Trade Checker</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>Survive a Tsunami Trade Checker</title>
 <style>
-body {
-  background:#0e0e0e;
-  color:white;
-  font-family: Arial, sans-serif;
-  text-align:center;
-  margin:0;
-}
-header {
-  background:#111;
-  padding:20px;
-  font-size:22px;
-  font-weight:bold;
-}
-.box {
-  background:#1b1b1b;
-  margin:15px;
-  padding:20px;
-  border-radius:10px;
-}
-select {
-  width:100%;
-  padding:12px;
-  font-size:16px;
-  border-radius:6px;
-}
-button {
-  margin-top:15px;
-  padding:12px 20px;
-  font-size:18px;
-  background:#ff4757;
-  color:white;
-  border:none;
-  border-radius:8px;
-}
-.result {
-  font-size:22px;
-  margin-top:15px;
-}
-.win { color:#2ed573; }
-.fair { color:#ffa502; }
-.loss { color:#ff6b6b; }
-footer {
-  font-size:13px;
-  opacity:0.6;
-  padding:10px;
-}
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f0f0f;
+    color: white;
+  }
+  header {
+    background: #111;
+    padding: 15px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+    background: #1a1a1a;
+    padding: 10px 0;
+  }
+  nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  nav a:hover {
+    color: #ff4757;
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  .offer {
+    background: #1b1b1b;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    min-width: 150px;
+    flex: 1 1 300px;
+  }
+  .offer h3 {
+    margin-top: 0;
+  }
+  select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    font-size: 16px;
+    border-radius: 6px;
+  }
+  .result {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  .win { background: #2ed573; color: black; }
+  .fair { background: #ffa502; color: black; }
+  .loss { background: #ff6b6b; color: black; }
+  footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    background: #111;
+    opacity: 0.7;
+  }
 </style>
 </head>
-
 <body>
 
-<header>🌊 Survive a Tsunami – Brainrots Trade Checker</header>
+<header>🌊 Survive a Tsunami – Trade Checker</header>
 
-<div class="box">
-  <h3>Your Item</h3>
-  <select id="itemA">
-    <option value="0">Select item</option>
-    <option value="10">Small Brainrot</option>
-    <option value="25">Medium Brainrot</option>
-    <option value="50">Large Brainrot</option>
-    <option value="100">Golden Brainrot</option>
-  </select>
+<nav>
+  <a href="#">Home</a>
+  <a href="#">Trade Checker</a>
+  <a href="#">Brainrot Values</a>
+  <a href="#">About</a>
+</nav>
+
+<div class="container">
+  <div class="offer">
+    <h3>Your Offer</h3>
+    <select id="yourItem1">
+      <option value="0">Select item</option>
+      <option value="10">Small Brainrot</option>
+      <option value="25">Medium Brainrot</option>
+      <option value="50">Large Brainrot</option>
+      <option value="100">Golden Brainrot</option>
+    </select>
+    <select id="yourItem2">
+      <option value="0">Select item</option>
+      <option value="10">Small Brainrot</option>
+      <option value="25">Medium Brainrot</option>
+      <option value="50">Large Brainrot</option>
+      <option value="100">Golden Brainrot</option>
+    </select>
+  </div>
+
+  <div class="offer">
+    <h3>Their Offer</h3>
+    <select id="theirItem1">
+      <option value="0">Select item</option>
+      <option value="10">Small Brainrot</option>
+      <option value="25">Medium Brainrot</option>
+      <option value="50">Large Brainrot</option>
+      <option value="100">Golden Brainrot</option>
+    </select>
+    <select id="theirItem2">
+      <option value="0">Select item</option>
+      <option value="10">Small Brainrot</option>
+      <option value="25">Medium Brainrot</option>
+      <option value="50">Large Brainrot</option>
+      <option value="100">Golden Brainrot</option>
+    </select>
+  </div>
 </div>
 
-<div class="box">
-  <h3>Their Item</h3>
-  <select id="itemB">
-    <option value="0">Select item</option>
-    <option value="10">Small Brainrot</option>
-    <option value="25">Medium Brainrot</option>
-    <option value="50">Large Brainrot</option>
-    <option value="100">Golden Brainrot</option>
-  </select>
+<div class="result" id="result">Select items to check trade</div>
+
+<div style="text-align:center; margin:20px;">
+  <button onclick="checkTrade()" style="padding:12px 20px; font-size:18px; background:#ff4757; color:white; border:none; border-radius:8px;">Check Trade</button>
 </div>
-
-<button onclick="checkTrade()">Check Trade</button>
-
-<div class="result" id="result"></div>
 
 <footer>
   Not official • Fan-made trade values
@@ -91,25 +137,28 @@ footer {
 
 <script>
 function checkTrade() {
-  let a = Number(document.getElementById("itemA").value);
-  let b = Number(document.getElementById("itemB").value);
-  let result = document.getElementById("result");
-
-  if (a === 0 || b === 0) {
-    result.innerHTML = "Select both items";
-    result.className = "result";
+  let yourTotal = Number(document.getElementById("yourItem1").value) +
+                  Number(document.getElementById("yourItem2").value);
+  let theirTotal = Number(document.getElementById("theirItem1").value) +
+                   Number(document.getElementById("theirItem2").value);
+  
+  let resultDiv = document.getElementById("result");
+  
+  if (yourTotal === 0 || theirTotal === 0) {
+    resultDiv.textContent = "Select items for both offers";
+    resultDiv.className = "result";
     return;
   }
-
-  if (b > a) {
-    result.innerHTML = "WIN ✅";
-    result.className = "result win";
-  } else if (b === a) {
-    result.innerHTML = "FAIR ⚖️";
-    result.className = "result fair";
+  
+  if (theirTotal > yourTotal) {
+    resultDiv.textContent = "WIN ✅";
+    resultDiv.className = "result win";
+  } else if (theirTotal === yourTotal) {
+    resultDiv.textContent = "FAIR ⚖️";
+    resultDiv.className = "result fair";
   } else {
-    result.innerHTML = "LOSS ❌";
-    result.className = "result loss";
+    resultDiv.textContent = "LOSS ❌";
+    resultDiv.className = "result loss";
   }
 }
 </script>
