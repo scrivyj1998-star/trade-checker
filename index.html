@@ -7,7 +7,7 @@
 <style>
   body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     background: #0f0f0f;
     color: white;
   }
@@ -32,74 +32,65 @@
     margin: 0 20px;
     text-decoration: none;
     font-weight: bold;
-    cursor: default; /* NIL links */
+    cursor: default;
   }
 
   nav a:hover {
     color: #ff4757;
   }
 
-  .container {
+  .trade-grid {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
     padding: 20px;
   }
 
-  .offer {
+  .trade-box {
     background: #1b1b1b;
-    padding: 20px;
-    margin: 10px;
+    padding: 15px;
     border-radius: 12px;
     min-width: 150px;
-    flex: 1 1 300px;
+    max-width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
   }
 
-  .offer h3 {
-    margin-top: 0;
+  .trade-box h3 {
     text-align: center;
   }
 
-  select {
+  .item-select {
     width: 100%;
+    margin: 5px 0;
     padding: 10px;
-    margin: 8px 0;
-    font-size: 16px;
     border-radius: 6px;
     background-repeat: no-repeat;
     background-position: 10px center;
-    padding-left: 50px; /* space for icon */
+    padding-left: 50px;
     color: black;
     font-weight: bold;
   }
 
-  option {
-    padding-left: 50px;
-  }
-
   .result {
     text-align: center;
-    font-size: 24px;
-    margin-top: 20px;
+    font-size: 26px;
+    margin: 20px auto;
     padding: 15px;
     border-radius: 12px;
+    width: 90%;
   }
 
   .win { background: #2ed573; color: black; }
   .fair { background: #ffa502; color: black; }
   .loss { background: #ff6b6b; color: black; }
 
-  footer {
-    text-align: center;
-    padding: 10px;
-    font-size: 13px;
-    background: #111;
-    opacity: 0.7;
-  }
-
   button {
     display: block;
-    margin: 20px auto;
+    margin: 10px auto 30px auto;
     padding: 12px 25px;
     font-size: 18px;
     background: #ff4757;
@@ -111,29 +102,37 @@
   button:hover {
     background: #ff6b81;
   }
+
+  footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    background: #111;
+    opacity: 0.7;
+  }
 </style>
 </head>
 <body>
 
 <header>🌊 Survive a Tsunami</header>
-
 <nav>
   <a>NIL</a>
   <a>NIL</a>
   <a>NIL</a>
 </nav>
 
-<div class="container">
-  <div class="offer">
+<div class="trade-grid">
+  <!-- Left Box = Your Offer -->
+  <div class="trade-box">
     <h3>Your Offer</h3>
-    <select id="yourItem1">
+    <select id="yourItem1" class="item-select">
       <option value="0" data-img="">Select item</option>
       <option value="10" data-img="https://i.imgur.com/9zF8vvl.png">Small Brainrot</option>
       <option value="25" data-img="https://i.imgur.com/JQz9gvd.png">Medium Brainrot</option>
       <option value="50" data-img="https://i.imgur.com/pnO8t2F.png">Large Brainrot</option>
       <option value="100" data-img="https://i.imgur.com/3wQ2jsh.png">Golden Brainrot</option>
     </select>
-    <select id="yourItem2">
+    <select id="yourItem2" class="item-select">
       <option value="0" data-img="">Select item</option>
       <option value="10" data-img="https://i.imgur.com/9zF8vvl.png">Small Brainrot</option>
       <option value="25" data-img="https://i.imgur.com/JQz9gvd.png">Medium Brainrot</option>
@@ -142,16 +141,17 @@
     </select>
   </div>
 
-  <div class="offer">
+  <!-- Right Box = Their Offer -->
+  <div class="trade-box">
     <h3>Their Offer</h3>
-    <select id="theirItem1">
+    <select id="theirItem1" class="item-select">
       <option value="0" data-img="">Select item</option>
       <option value="10" data-img="https://i.imgur.com/9zF8vvl.png">Small Brainrot</option>
       <option value="25" data-img="https://i.imgur.com/JQz9gvd.png">Medium Brainrot</option>
       <option value="50" data-img="https://i.imgur.com/pnO8t2F.png">Large Brainrot</option>
       <option value="100" data-img="https://i.imgur.com/3wQ2jsh.png">Golden Brainrot</option>
     </select>
-    <select id="theirItem2">
+    <select id="theirItem2" class="item-select">
       <option value="0" data-img="">Select item</option>
       <option value="10" data-img="https://i.imgur.com/9zF8vvl.png">Small Brainrot</option>
       <option value="25" data-img="https://i.imgur.com/JQz9gvd.png">Medium Brainrot</option>
@@ -162,15 +162,12 @@
 </div>
 
 <div class="result" id="result">Select items to check trade</div>
-
 <button onclick="checkTrade()">Check Trade</button>
 
-<footer>
-  Not official • Fan-made trade values
-</footer>
+<footer>Not official • Fan-made trade values</footer>
 
 <script>
-// Show images in dropdown (works on most modern mobile browsers)
+// Add icons to selects
 function setSelectImages(selectId) {
   const select = document.getElementById(selectId);
   function updateImage() {
