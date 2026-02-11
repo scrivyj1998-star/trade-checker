@@ -12,7 +12,6 @@
     color: white;
   }
 
-  /* Top navigation */
   header {
     background: #111;
     padding: 15px;
@@ -40,7 +39,6 @@
     color: #ff4757;
   }
 
-  /* Trade checker container */
   .container {
     display: flex;
     flex-wrap: wrap;
@@ -68,6 +66,15 @@
     margin: 8px 0;
     font-size: 16px;
     border-radius: 6px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding-left: 50px; /* space for icon */
+    color: black;
+    font-weight: bold;
+  }
+
+  option {
+    padding-left: 50px;
   }
 
   .result {
@@ -120,36 +127,36 @@
   <div class="offer">
     <h3>Your Offer</h3>
     <select id="yourItem1">
-      <option value="0">Select item</option>
-      <option value="10">Small Brainrot</option>
-      <option value="25">Medium Brainrot</option>
-      <option value="50">Large Brainrot</option>
-      <option value="100">Golden Brainrot</option>
+      <option value="0" data-img="">Select item</option>
+      <option value="10" data-img="https://i.imgur.com/9zF8vvl.png">Small Brainrot</option>
+      <option value="25" data-img="https://i.imgur.com/JQz9gvd.png">Medium Brainrot</option>
+      <option value="50" data-img="https://i.imgur.com/pnO8t2F.png">Large Brainrot</option>
+      <option value="100" data-img="https://i.imgur.com/3wQ2jsh.png">Golden Brainrot</option>
     </select>
     <select id="yourItem2">
-      <option value="0">Select item</option>
-      <option value="10">Small Brainrot</option>
-      <option value="25">Medium Brainrot</option>
-      <option value="50">Large Brainrot</option>
-      <option value="100">Golden Brainrot</option>
+      <option value="0" data-img="">Select item</option>
+      <option value="10" data-img="https://i.imgur.com/9zF8vvl.png">Small Brainrot</option>
+      <option value="25" data-img="https://i.imgur.com/JQz9gvd.png">Medium Brainrot</option>
+      <option value="50" data-img="https://i.imgur.com/pnO8t2F.png">Large Brainrot</option>
+      <option value="100" data-img="https://i.imgur.com/3wQ2jsh.png">Golden Brainrot</option>
     </select>
   </div>
 
   <div class="offer">
     <h3>Their Offer</h3>
     <select id="theirItem1">
-      <option value="0">Select item</option>
-      <option value="10">Small Brainrot</option>
-      <option value="25">Medium Brainrot</option>
-      <option value="50">Large Brainrot</option>
-      <option value="100">Golden Brainrot</option>
+      <option value="0" data-img="">Select item</option>
+      <option value="10" data-img="https://i.imgur.com/9zF8vvl.png">Small Brainrot</option>
+      <option value="25" data-img="https://i.imgur.com/JQz9gvd.png">Medium Brainrot</option>
+      <option value="50" data-img="https://i.imgur.com/pnO8t2F.png">Large Brainrot</option>
+      <option value="100" data-img="https://i.imgur.com/3wQ2jsh.png">Golden Brainrot</option>
     </select>
     <select id="theirItem2">
-      <option value="0">Select item</option>
-      <option value="10">Small Brainrot</option>
-      <option value="25">Medium Brainrot</option>
-      <option value="50">Large Brainrot</option>
-      <option value="100">Golden Brainrot</option>
+      <option value="0" data-img="">Select item</option>
+      <option value="10" data-img="https://i.imgur.com/9zF8vvl.png">Small Brainrot</option>
+      <option value="25" data-img="https://i.imgur.com/JQz9gvd.png">Medium Brainrot</option>
+      <option value="50" data-img="https://i.imgur.com/pnO8t2F.png">Large Brainrot</option>
+      <option value="100" data-img="https://i.imgur.com/3wQ2jsh.png">Golden Brainrot</option>
     </select>
   </div>
 </div>
@@ -163,6 +170,22 @@
 </footer>
 
 <script>
+// Show images in dropdown (works on most modern mobile browsers)
+function setSelectImages(selectId) {
+  const select = document.getElementById(selectId);
+  function updateImage() {
+    const selected = select.options[select.selectedIndex];
+    select.style.backgroundImage = selected.dataset.img ? `url('${selected.dataset.img}')` : '';
+    select.style.backgroundSize = '35px 35px';
+    select.style.backgroundRepeat = 'no-repeat';
+    select.style.backgroundPosition = '10px center';
+  }
+  select.addEventListener('change', updateImage);
+  updateImage();
+}
+
+['yourItem1','yourItem2','theirItem1','theirItem2'].forEach(id => setSelectImages(id));
+
 function checkTrade() {
   let yourTotal = Number(document.getElementById("yourItem1").value) +
                   Number(document.getElementById("yourItem2").value);
