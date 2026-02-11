@@ -7,10 +7,12 @@
 <style>
   body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     background: #0f0f0f;
     color: white;
   }
+
+  /* Top navigation */
   header {
     background: #111;
     padding: 15px;
@@ -18,38 +20,48 @@
     font-size: 22px;
     font-weight: bold;
   }
+
   nav {
     display: flex;
     justify-content: center;
     background: #1a1a1a;
     padding: 10px 0;
   }
+
   nav a {
     color: white;
-    margin: 0 15px;
+    margin: 0 20px;
     text-decoration: none;
     font-weight: bold;
+    cursor: default; /* NIL links */
   }
+
   nav a:hover {
     color: #ff4757;
   }
+
+  /* Trade checker container */
   .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 20px;
   }
+
   .offer {
     background: #1b1b1b;
     padding: 20px;
     margin: 10px;
-    border-radius: 10px;
+    border-radius: 12px;
     min-width: 150px;
     flex: 1 1 300px;
   }
+
   .offer h3 {
     margin-top: 0;
+    text-align: center;
   }
+
   select {
     width: 100%;
     padding: 10px;
@@ -57,16 +69,19 @@
     font-size: 16px;
     border-radius: 6px;
   }
+
   .result {
     text-align: center;
     font-size: 24px;
     margin-top: 20px;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 12px;
   }
+
   .win { background: #2ed573; color: black; }
   .fair { background: #ffa502; color: black; }
   .loss { background: #ff6b6b; color: black; }
+
   footer {
     text-align: center;
     padding: 10px;
@@ -74,17 +89,31 @@
     background: #111;
     opacity: 0.7;
   }
+
+  button {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 25px;
+    font-size: 18px;
+    background: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #ff6b81;
+  }
 </style>
 </head>
 <body>
 
-<header>🌊 Survive a Tsunami – Trade Checker</header>
+<header>🌊 Survive a Tsunami</header>
 
 <nav>
-  <a href="#">Home</a>
-  <a href="#">Trade Checker</a>
-  <a href="#">Brainrot Values</a>
-  <a href="#">About</a>
+  <a>NIL</a>
+  <a>NIL</a>
+  <a>NIL</a>
 </nav>
 
 <div class="container">
@@ -127,9 +156,7 @@
 
 <div class="result" id="result">Select items to check trade</div>
 
-<div style="text-align:center; margin:20px;">
-  <button onclick="checkTrade()" style="padding:12px 20px; font-size:18px; background:#ff4757; color:white; border:none; border-radius:8px;">Check Trade</button>
-</div>
+<button onclick="checkTrade()">Check Trade</button>
 
 <footer>
   Not official • Fan-made trade values
